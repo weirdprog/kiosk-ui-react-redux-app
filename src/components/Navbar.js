@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom'
           <Link to="/" className="brand-logo">Kiosk UI</Link>
           
           <ul className="right">
-              <li><Link to="/">Shop</Link></li>
-              <li><Link to="/admin">Admin</Link></li>
-              <li><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            <li><Link to="/">Shop</Link></li>
+            <li><Link to="/cart">Redux Cart</Link></li>
+            <li><Link to="/products">Product Cart</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
           </ul>
         </div>
       </nav>  

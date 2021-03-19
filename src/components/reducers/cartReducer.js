@@ -1,7 +1,4 @@
 import Item1 from '../../images/kiosk-ui/product1.png'
-import Item2 from '../../images/kiosk-ui/product2.png'
-import Item3 from '../../images/kiosk-ui/product3.png'
-import Item4 from '../../images/kiosk-ui/product4.png'
 import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING,SET_ITEMS } from '../actions/action-types/cart-actions'
 
 

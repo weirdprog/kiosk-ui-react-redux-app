@@ -47,7 +47,7 @@ class Admin extends Component {
         return(
           <div className="card" key={product.id}>
             <div className="card-image">
-              <img src={product.images ? product.images[0].url : ''} alt="Missing Image" />
+              <img src={product.images ? product.images[0].url : ''} alt="missing" />
               <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue" onClick={()=>{this.handleClick(product.id)}}><i className="material-icons">remove</i></span>
             </div>
 
