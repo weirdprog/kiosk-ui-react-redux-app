@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addToCart } from './actions/cartActions'
+import { addToCart, setItems } from './actions/cartActions'
 
 
  class Home extends Component{
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
-    };
-  }
 
   componentDidMount() {
     const url = '/products/search';
@@ -20,30 +11,19 @@ import { addToCart } from './actions/cartActions'
       per_page: 5
     };
     const requestMetadata = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postBody)
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postBody)
     };
 
     fetch(url, requestMetadata)
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          console.log("Product search result:\n%s", JSON.stringify(result));
+          this.props.setItems(result);
         }
       )
   }
@@ -53,23 +33,21 @@ import { addToCart } from './actions/cartActions'
   }
 
   render(){
-      let itemList = this.props.items.map(item=>{
-          return(
-              <div className="card" key={item.id}>
-                      <div className="card-image">
-                          <img src={item.img} alt={item.title}/>
-                          <span className="card-title">{item.title}</span>
-                          <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
-                      </div>
+    let itemList = this.props.items.map(item=>{
+    return(
+      <div className="card" key={item.id}>
+        <div className="card-image">
+          <img src={item.img} alt="Missing Image" />
+          <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
+        </div>
 
-                      <div className="card-content">
-                          <p>{item.desc}</p>
-                          <p><b>Price: {item.price}$</b></p>
-                      </div>
-                </div>
-
-          )
-      })
+        <div className="card-content">
+          <p>{item.description}</p>
+          <p><b>Price: {item.price}$</b></p>
+        </div>
+      </div>
+    )
+  })
 
       return(
           <div className="container">
@@ -89,7 +67,8 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps= (dispatch)=>{
     
     return{
-        addToCart: (id)=>{dispatch(addToCart(id))}
+        addToCart: (id)=>{dispatch(addToCart(id))},
+        setItems: (items)=>{dispatch(setItems(items))}
     }
 }
 
