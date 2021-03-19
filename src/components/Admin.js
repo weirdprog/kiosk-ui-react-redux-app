@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { deleteProduct, searchProducts } from './lib/kiosk'
 
 class Admin extends Component {
 
@@ -12,58 +13,27 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    const url = '/products/search';
-    const postBody = {
-      per_page: 50
-    };
-    const requestMetadata = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(postBody)
-    };
-
-    fetch(url, requestMetadata)
-      .then(res => res.json())
+    searchProducts()
       .then(
-        (result) => {
-          console.log("Product search result:\n%s", JSON.stringify(result));
+        (products) => {
           this.setState({
             isLoaded: true,
-            products: result
+            products: products
           });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+        });
   }
 
-  deleteProduct = (id) => {
-
-    console.log("Deleting product id: %s", id);
-
-    const url = '/products/' + id;
-    const requestMetadata = {
-      method: 'DELETE',
-    };
-
-    fetch(url, requestMetadata)
+  handleClick = (id) => {
+    deleteProduct(id)
       .then(
-        (res) => {
-          if (res.status === 204) {
+        (status) => {
+          if (status === 204) {
             const products = this.state.products.filter(p => p.id !== id)
             this.setState({products})
             console.log("Product has been deleted successfully"); 
           }
-        });
+        }
+      )
   }
 
   render() {
@@ -78,7 +48,7 @@ class Admin extends Component {
           <div className="card" key={product.id}>
             <div className="card-image">
               <img src={product.images ? product.images[0].url : ''} alt="Missing Image" />
-              <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue" onClick={()=>{this.deleteProduct(product.id)}}><i className="material-icons">remove</i></span>
+              <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue" onClick={()=>{this.handleClick(product.id)}}><i className="material-icons">remove</i></span>
             </div>
 
             <div className="card-content">
