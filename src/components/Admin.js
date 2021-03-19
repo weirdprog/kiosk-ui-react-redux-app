@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { deleteProduct, searchProducts } from './lib/kiosk'
+import { deleteProduct, searchProducts } from '../lib/kiosk'
 
 class Admin extends Component {
 
@@ -13,7 +13,7 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    searchProducts()
+    searchProducts(50)
       .then(
         (products) => {
           this.setState({

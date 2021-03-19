@@ -1,28 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addToCart, setItems } from './actions/cartActions'
+import { searchProducts } from '../lib/kiosk'
 
 
  class Home extends Component {
 
   componentDidMount() {
-    const url = '/products/search';
-    const postBody = {
-      per_page: 5
-    };
-    const requestMetadata = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(postBody)
-    };
-
-    fetch(url, requestMetadata)
-      .then(res => res.json())
+    searchProducts(5)
       .then(
         (result) => {
-          console.log("Product search result:\n%s", JSON.stringify(result));
           this.props.setItems(result);
         }
       )
@@ -72,4 +59,4 @@ const mapDispatchToProps= (dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

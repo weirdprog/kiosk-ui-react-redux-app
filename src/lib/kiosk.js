@@ -1,9 +1,9 @@
-export async function searchProducts() {
+export async function searchProducts(per_page) {
 
   const url = '/products/search';
 
   const postBody = {
-    per_page: 50
+    per_page: per_page
   };
 
   const requestMetadata = {
