@@ -78,7 +78,7 @@ class Admin extends Component {
           <div className="card" key={product.id}>
             <div className="card-image">
               <img src={product.images ? product.images[0].url : ''} alt="Missing Image" />
-              <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.deleteProduct(product.id)}}><i className="material-icons">remove</i></span>
+              <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue" onClick={()=>{this.deleteProduct(product.id)}}><i className="material-icons">remove</i></span>
             </div>
 
             <div className="card-content">

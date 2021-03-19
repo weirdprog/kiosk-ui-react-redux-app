@@ -38,7 +38,7 @@ import { addToCart, setItems } from './actions/cartActions'
         <div className="card" key={item.id}>
           <div className="card-image">
             <img src={item.img} alt="Missing Image" />
-            <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
+            <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
           </div>
 
           <div className="card-content">
