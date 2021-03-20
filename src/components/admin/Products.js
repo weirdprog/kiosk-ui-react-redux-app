@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { deleteProduct, searchProducts } from '../lib/kiosk'
+import { deleteProduct, searchProducts } from '../../lib/kiosk'
 
-class Admin extends Component {
+class AdminProducts extends Component {
 
   constructor(props) {
     super(props);
@@ -59,7 +59,7 @@ class Admin extends Component {
       })
       return (
         <div className="container">
-          <h3 className="center">All Products</h3>
+          <h3 className="center">Products</h3>
           <div className="box">
             {itemList}
           </div>
@@ -69,4 +69,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default AdminProducts;
