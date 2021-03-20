@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { searchProducts } from '../lib/kiosk'
+import ColorPicker from './ColorPicker'
+import SizePicker from './SizePicker'
 
 class ProductCart extends Component {
 
@@ -74,15 +76,19 @@ class ProductCart extends Component {
     } else {
       let itemList = products.map(product=>{
         return(
-          <div className="card" key={product.id}>
+          <div className="card">
             <div className="card-image">
-              <img src={product.images ? product.images[0].url : ''} alt="missing" />
+              <img src={product.images ? product.images[0].url : ''} alt="missing" height="100px" />
             </div>
 
             <div className="card-content">
+
               <p>{product.description}</p>
+
+              <ColorPicker />
+              <SizePicker />
+
               <p>
-                
                 <input 
                   type="text" 
                   placeholder="Enter quantity" 
@@ -98,16 +104,45 @@ class ProductCart extends Component {
                   <i className="material-icons">remove</i>
                 </a>
               </p>
+
             </div>
           </div>
         )
       })
       return (
         <div className="container">
-          <h3 className="center">All Products</h3>
-          <div className="box">
-            {itemList}
+          <div className="row">
+            <div className="col s9">
+              <div className="card-panel grey darken-2 white-text">Fan Wear</div>
+              <div className="card-panel grey lighten-2">Stafford Soccer Fan Wear Items</div>
+              <div className="box">
+                {itemList}
+              </div>
+            </div>
+            <div className="col s3">
+              <div className="card">
+                <div className="card-content">
+                  <span className="card-title grey">Order Summary</span>
+                  <div className="row">
+                    <div className="col s9">Registration</div>
+                    <div className="col s3">$85.00</div>
+                  </div>
+                  <div className="row">
+                    <div className="col s9">Fan Wear Items</div>
+                    <div className="col s3">$0.00</div>
+                  </div>
+                  <div className="row">
+                    <div className="col s9">Cart Subtotal</div>
+                    <div className="col s3">$85.00</div>
+                  </div>
+                </div>
+                <div class="card-action">
+                  <a class="waves-effect waves-light btn blue">View Cart</a>
+                </div>
+              </div>
+            </div>
           </div>
+          
         </div>
       );
     }
